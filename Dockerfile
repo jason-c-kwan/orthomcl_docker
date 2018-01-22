@@ -2,7 +2,7 @@ FROM appcontainers/mysql:debian
 MAINTAINER Jason C. Kwan "jason.kwan@wisc.edu"
 
 RUN apt-get update
-RUN apt-get install -y wget cpanminus build-essential libmysqlclient-dev
+RUN apt-get install -y wget cpanminus build-essential libmysqlclient-dev python
 RUN wget http://www.micans.org/mcl/src/mcl-latest.tar.gz
 RUN tar xvf mcl-latest.tar.gz
 RUN cd mcl-* && ./configure && make && make install
@@ -13,4 +13,5 @@ RUN mkdir diamond && cd diamond && wget http://github.com/bbuchfink/diamond/rele
 RUN rm *.tar.gz
 
 COPY my.cnf /etc/mysql/
+COPY run_orthomcl.py /bin/
 ENV PATH="/diamond:/orthomclSoftware-v2.0.9/bin:${PATH}"
